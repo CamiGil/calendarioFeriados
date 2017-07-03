@@ -9,7 +9,10 @@ import java.time.Month;
 import org.junit.Test;
 
 public class TestCalendario {
-
+	
+	Configurador config = new Configurador();
+	RepositorioFeriados repo = RepositorioFeriados.getInstance();
+	
 	@Test
 	public void unLunesEsUnLunes() {
 		LocalDate fecha = LocalDate.of(2017,06,26);
@@ -35,21 +38,28 @@ public class TestCalendario {
 	}
 	
 	@Test
-	public void el25DeMayoEsFeriado() {
-		LocalDate fecha = LocalDate.of(LocalDate.now().getYear(),05,25);
-		assertEquals(true, FechaFeriado.esFeriado(fecha));
+	public void el25DeMayoDe2017EsFeriado() {
+		LocalDate fecha = LocalDate.of(2017,05,25);
+		assertEquals(true, repo.esFeriado(fecha));
+	}
+	
+	@Test
+	public void el25DeMayoDe1980EsFeriado() {
+		LocalDate fecha = LocalDate.of(1980,05,25);
+		assertEquals(true, repo.esFeriado(fecha));
 	}
 	
 	@Test
 	public void todosLosLunesSonFeriados() {
+		config.crearFeriados();
 		LocalDate fecha = LocalDate.of(2017,07,3);
-		assertEquals(true, FechaFeriado.esFeriado(fecha));
+		assertEquals(true, repo.esFeriado(fecha));
 	}
 		
 	@Test
 	public void el4DeJulioDe1900FueFeriado() {
 		LocalDate fecha = LocalDate.of(1900,07,4);
-		assertEquals(true, FechaFeriado.esFeriado(fecha));
+		assertEquals(true, repo.esFeriado(fecha));
 	}
 	
 }
