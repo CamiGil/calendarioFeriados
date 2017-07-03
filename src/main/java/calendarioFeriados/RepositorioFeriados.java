@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepositorioFeriados implements Repositorio{
+public class RepositorioFeriados implements Repositorio {
 
 	// ATRIBUTOS //
 
@@ -54,6 +54,17 @@ public class RepositorioFeriados implements Repositorio{
 		boolean diaParticular = this.esteDiaParticularEsFeriado(fecha);
 
 		return diaSemanaFeriado || diaDelMesFeriado || diaParticular;
+	}
+
+	public boolean yaExisteEsteDiaFeriado(DayOfWeek diaAAgregar) {
+		return diaSemanaFeriado.stream().anyMatch(
+				dia -> dia.equals(diaAAgregar));
+	}
+
+	public boolean esteDiaDeEsteMesEsFeriado(DiaSinAnio fechaAAgregar) {
+		return diaDelMesFeriado.stream().anyMatch(
+				diaDelMes -> diaDelMes.getDia() == fechaAAgregar.getDia()
+						&& diaDelMes.getMes() == fechaAAgregar.getMes());
 	}
 
 }
