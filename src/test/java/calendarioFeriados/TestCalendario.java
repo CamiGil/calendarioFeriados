@@ -178,6 +178,7 @@ public class TestCalendario {
 		config.agregarFeriado(25, 12, desde, hasta);
 	}
 
+	@Test
 	public void agregoLosJuevesComoFeriadosEnUnPeriodoYEsFeriadoEnEsePeriodo() {
 		LocalDate fecha = LocalDate.of(2015, 1, 8);
 		LocalDate desde = LocalDate.of(2015, 1, 1);
@@ -190,10 +191,11 @@ public class TestCalendario {
 						&& repo.esFeriado(LocalDate.of(2015, 7, 6)));
 	}
 
+	@Test
 	public void agregoMuchosFeriadosYSonFeriados() {
-		LocalDate fecha = LocalDate.of(2015, 1, 8);
+		LocalDate fecha = LocalDate.of(1996, 1, 8);
 		LocalDate desde = LocalDate.of(2015, 1, 1);
-		LocalDate hasta = LocalDate.of(3000, 1, 1);
+		LocalDate hasta = LocalDate.of(2333, 1, 1);
 
 		config.agregarFeriado(fecha);
 		config.agregarFeriado(DayOfWeek.THURSDAY, desde, hasta);
@@ -206,6 +208,18 @@ public class TestCalendario {
 						&& repo.esFeriado(LocalDate.of(2017, 7, 6)));
 	}
 
+	@Test
+	public void diaMesFeriadoSinVencimiento() {
+		config.agregarFeriado(3, 3);
+
+		assertEquals(
+				true,
+				repo.esFeriado(LocalDate.of(1000, 3, 3))
+						&& repo.esFeriado(LocalDate.of(2017, 3, 3))
+						&& repo.esFeriado(LocalDate.of(3000, 3, 3)));
+	}
+
+	@Test
 	public void agregoMuchosFeriadosYOtrasFechasNoSonFeriados() {
 		LocalDate fecha = LocalDate.of(2015, 1, 8);
 		LocalDate desde = LocalDate.of(2015, 1, 1);
@@ -222,16 +236,13 @@ public class TestCalendario {
 						&& repo.esFeriado(LocalDate.of(2017, 7, 7)));
 	}
 
+	@Test(expected = java.time.DateTimeException.class)
 	public void anioBisiestoFeriadoEnAnioNoBisiesto() {
-
-		LocalDate desde = LocalDate.of(1000, 1, 1);
-		LocalDate hasta = LocalDate.of(3000, 1, 1);
-
-		config.agregarFeriado(29, 2, desde, hasta);
 
 		assertEquals(false, repo.esFeriado(LocalDate.of(2017, 2, 29)));
 	}
 
+	@Test
 	public void anioBisiestoFeriadoEnAnioBisiesto() {
 
 		LocalDate desde = LocalDate.of(1000, 1, 1);

@@ -16,5 +16,5 @@ public interface Repositorio {
 			DiaSemanaFeriado diaAAgregar);
 
 	public boolean yaExisteEsteDiaDeEsteMesFeriadoEnEsePeriodo(
-			DiaSinAnio fechaAAgregar);
+			DiaSinAnioEnPeriodo fechaAAgregar);
 }

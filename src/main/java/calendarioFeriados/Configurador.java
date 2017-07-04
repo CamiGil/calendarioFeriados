@@ -39,7 +39,7 @@ public class Configurador {
 	public void agregarFeriado(int dia, int mes, LocalDate desde,
 			LocalDate hasta) {
 
-		DiaSinAnio diaAAgregar = new DiaSinAnio(dia, mes, desde, hasta);
+		DiaSinAnioEnPeriodo diaAAgregar = new DiaSinAnioEnPeriodo(dia, mes, desde, hasta);
 
 		if (repo.yaExisteEsteDiaDeEsteMesFeriadoEnEsePeriodo(diaAAgregar)) {
 			throw new RuntimeException(
@@ -47,6 +47,19 @@ public class Configurador {
 		} else if (hasta.isBefore(desde) || desde.equals(hasta)) {
 			throw new RuntimeException(
 					"Existe un error con el periodo de validez del feriado");
+		} else {
+			repo.diaDelMesFeriadoEnPeriodo.add(diaAAgregar);
+		}
+	}
+	
+	// Agregar feriado de dia y mes sin periodo
+	public void agregarFeriado(int dia, int mes) {
+
+		DiaSinAnio diaAAgregar = new DiaSinAnio(dia, mes);
+
+		if (repo.yaExisteEsteDiaDeEsteMesFeriado(diaAAgregar)) {
+			throw new RuntimeException(
+					"Ya existe este dia en este mes como feriado");
 		} else {
 			repo.diaDelMesFeriado.add(diaAAgregar);
 		}
