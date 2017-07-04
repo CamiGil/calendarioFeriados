@@ -183,7 +183,11 @@ public class TestCalendario {
 		LocalDate desde = LocalDate.of(2015, 1, 1);
 		LocalDate hasta = LocalDate.of(2016, 1, 1);
 		config.agregarFeriado(DayOfWeek.THURSDAY, desde, hasta);
-		assertEquals(true, repo.esFeriado(fecha));
+		assertEquals(
+				true,
+				repo.esFeriado(fecha)
+						&& repo.esFeriado(LocalDate.of(2015, 1, 15))
+						&& repo.esFeriado(LocalDate.of(2015, 7, 6)));
 	}
 
 	public void agregoMuchosFeriadosYSonFeriados() {
@@ -216,6 +220,26 @@ public class TestCalendario {
 				repo.esFeriado(LocalDate.of(2017, 8, 1))
 						&& repo.esFeriado(LocalDate.of(2017, 2, 1))
 						&& repo.esFeriado(LocalDate.of(2017, 7, 7)));
+	}
+
+	public void anioBisiestoFeriadoEnAnioNoBisiesto() {
+
+		LocalDate desde = LocalDate.of(1000, 1, 1);
+		LocalDate hasta = LocalDate.of(3000, 1, 1);
+
+		config.agregarFeriado(29, 2, desde, hasta);
+
+		assertEquals(false, repo.esFeriado(LocalDate.of(2017, 2, 29)));
+	}
+
+	public void anioBisiestoFeriadoEnAnioBisiesto() {
+
+		LocalDate desde = LocalDate.of(1000, 1, 1);
+		LocalDate hasta = LocalDate.of(3000, 1, 1);
+
+		config.agregarFeriado(29, 2, desde, hasta);
+
+		assertEquals(true, repo.esFeriado(LocalDate.of(2016, 2, 29)));
 	}
 
 }

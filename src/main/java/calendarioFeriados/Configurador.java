@@ -35,6 +35,7 @@ public class Configurador {
 		}
 	}
 
+	// Agregar feriado de dia y mes en un rango de anios
 	public void agregarFeriado(int dia, int mes, LocalDate desde,
 			LocalDate hasta) {
 

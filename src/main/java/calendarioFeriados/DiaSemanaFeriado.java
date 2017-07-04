@@ -43,6 +43,4 @@ public class DiaSemanaFeriado {
 		this.hasta = hasta;
 	}
 
-	// METODOS //
-
 }
