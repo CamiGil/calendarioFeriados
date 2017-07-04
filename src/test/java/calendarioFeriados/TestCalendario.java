@@ -57,6 +57,7 @@ public class TestCalendario {
 	@Test
 	public void el25DeMayoDe1980EsFeriado() {
 		LocalDate fecha = LocalDate.of(1980, 05, 25);
+		config.agregarFeriado(fecha);
 		assertEquals(true, repo.esFeriado(fecha));
 	}
 
@@ -102,12 +103,16 @@ public class TestCalendario {
 //	@Test(expected = RuntimeException.class)
 //	public void agregoUnDiaDeLaSemanaRepetidoComoFeriadoYNoMeDeja() {
 //		
-//		DayOfWeek dia = DayOfWeek.SUNDAY;
+//		DayOfWeek dia = DayOfWeek.TUESDAY;
 //		LocalDate desde = LocalDate.of(2010, 1, 1);
-//		LocalDate hasta = LocalDate.of(2019, 1, 1);
+//		LocalDate hasta = LocalDate.of(2011, 1, 1);
+//		
+//		DayOfWeek dia2 = DayOfWeek.TUESDAY;
+//		LocalDate desde2 = LocalDate.of(2010, 1, 1);
+//		LocalDate hasta2 = LocalDate.of(2011, 1, 1);
 //		
 //		config.agregarFeriado(dia,desde,hasta);
-//		config.agregarFeriado(dia,desde,hasta);
+//		config.agregarFeriado(dia2,desde2,hasta2);
 //	}
 
 	@Test
@@ -133,6 +138,14 @@ public class TestCalendario {
 		assertEquals(true, repo.esFeriado(fecha));
 	}
 	
+//	@Test(expected = Exception.class)
+//	public void el1DeDiciembreYaExistiaComoFeriadoYNoMeDejaGuardarlo() {
+//		LocalDate desde = LocalDate.of(2000, 1, 1);
+//		LocalDate hasta = LocalDate.of(3000, 1, 1);
+//		
+//		config.agregarFeriado(1,12,desde,hasta);
+//	}
+
 	@Test(expected = java.lang.IllegalArgumentException.class)
 	public void noPuedoHacerEl1del13Feriado() {
 		LocalDate desde = LocalDate.of(2000, 1, 1);
@@ -155,9 +168,20 @@ public class TestCalendario {
 		LocalDate desde = LocalDate.of(2000, 1, 1);
 		LocalDate hasta = LocalDate.of(3000, 1, 1);
 		
-		config.agregarFeriado(25,12,desde,hasta);
-		LocalDate fecha = LocalDate.of(LocalDate.now().getYear(), 12, 25);
+		config.agregarFeriado(16,12,desde,hasta);
+		LocalDate fecha = LocalDate.of(LocalDate.now().getYear(), 12, 16);
 		assertEquals(true, repo.esFeriado(fecha));
+	}
+	
+	@Test
+	public void unFeriadoDespuesDeSuPeriodoDeValidezYaNoEsFeriado() {
+
+		LocalDate desde = LocalDate.of(2000, 1, 1);
+		LocalDate hasta = LocalDate.of(3000, 1, 1);
+		
+		config.agregarFeriado(13,12,desde,hasta);
+		LocalDate fecha = LocalDate.of(3090, 12, 25);
+		assertEquals(false, repo.esFeriado(fecha));
 	}
 	
 	@Test(expected = RuntimeException.class)
@@ -185,7 +209,7 @@ public class TestCalendario {
 //		
 //		config.agregarFeriado(25,12,desde,hasta);
 //	}
-//	
+	
 	public void agregoLosJuevesComoFeriadosDesde1DeEneroDe2015A1DeEneroDe2016() {
 		LocalDate fecha = LocalDate.of(2015, 1, 8);
 		LocalDate desde = LocalDate.of(2015, 1, 1);

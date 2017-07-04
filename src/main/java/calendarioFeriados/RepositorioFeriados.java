@@ -29,8 +29,8 @@ public class RepositorioFeriados implements Repositorio {
 	public boolean esteDiaDeLaSemanaEsFeriado(LocalDate fecha) {
 		return diaSemanaFeriado.stream().anyMatch(
 				dia -> dia.getDia().equals(fecha.getDayOfWeek())
-						&& dia.getDesde().isBefore(LocalDate.now())
-						&& dia.getHasta().isAfter(LocalDate.now()));
+						&& dia.getDesde().isBefore(fecha)
+						&& dia.getHasta().isAfter(fecha));
 	}
 
 	public boolean esteDiaDelMesEsFeriado(LocalDate fecha) {
@@ -41,8 +41,8 @@ public class RepositorioFeriados implements Repositorio {
 		return diaDelMesFeriado.stream().anyMatch(
 				diaDelMes -> diaDelMes.getDia() == dia
 						&& diaDelMes.getMes() == mes
-						&& diaDelMes.getDesde().isBefore(LocalDate.now())
-						&& diaDelMes.getHasta().isAfter(LocalDate.now()));
+						&& diaDelMes.getDesde().isBefore(fecha)
+						&& diaDelMes.getHasta().isAfter(fecha));
 	}
 
 	public boolean esteDiaParticularEsFeriado(LocalDate fecha) {
@@ -72,8 +72,8 @@ public class RepositorioFeriados implements Repositorio {
 		return diaDelMesFeriado.stream().anyMatch(
 				combo -> combo.getDia() == fechaAAgregar.getDia()
 						&& combo.getMes() == fechaAAgregar.getMes()
-						&& combo.getDesde().equals(fechaAAgregar)
-						&& combo.getHasta().equals(fechaAAgregar));
+						&& combo.getDesde().equals(fechaAAgregar.getDesde())
+						&& combo.getHasta().equals(fechaAAgregar.getHasta()));
 	}
 
 }
