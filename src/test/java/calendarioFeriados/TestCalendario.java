@@ -96,22 +96,22 @@ public class TestCalendario {
 	public void agregoUnDiaDeLaSemanaParaQueSeaFeriadoYSeHaceFeriado() {
 		
 		DayOfWeek dia = DayOfWeek.SUNDAY;
-		LocalDate desde = LocalDate.of(2000, 1, 1);
-		LocalDate hasta = LocalDate.of(3000, 1, 1);
+		LocalDate desde = LocalDate.of(2010, 1, 1);
+		LocalDate hasta = LocalDate.of(2019, 1, 1);
 		
 		config.agregarFeriado(dia,desde,hasta);
 		LocalDate fecha = LocalDate.of(2017, 07, 2);
 		assertEquals(true, repo.esFeriado(fecha));
 	}
 
-//	@Test(expected = RuntimeException.class)
-//	public void agregoUnDiaDeLaSemanaRepetidoComoFeriadoYNoMeDeja() {
-//		DayOfWeek dia = DayOfWeek.SUNDAY;
-//		LocalDate desde = LocalDate.of(2000, 1, 1);
-//		LocalDate hasta = LocalDate.of(3000, 1, 1);
-//		
-//		config.agregarFeriado(dia,desde,hasta);
-//	}
+	@Test(expected = RuntimeException.class)
+	public void agregoUnDiaDeLaSemanaRepetidoComoFeriadoYNoMeDeja() {
+		DayOfWeek dia = DayOfWeek.SUNDAY;
+		LocalDate desde = LocalDate.of(2010, 1, 1);
+		LocalDate hasta = LocalDate.of(2019, 1, 1);
+		
+		config.agregarFeriado(dia,desde,hasta);
+	}
 
 	@Test
 	public void agregoUnDiaParticularParaQueSeaFeriadoYSeHaceFeriado() {

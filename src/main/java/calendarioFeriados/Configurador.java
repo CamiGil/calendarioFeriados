@@ -10,8 +10,7 @@ public class Configurador {
 	// Agregar feriado dia de la semana en un periodo
 	public void agregarFeriado(DayOfWeek diaSemana, LocalDate desde, LocalDate hasta) {
 
-		DiaSemanaFeriado diaAAgregar = new DiaSemanaFeriado();
-		diaAAgregar.setDiaSemanaFeriado(diaSemana, desde, hasta);
+		DiaSemanaFeriado diaAAgregar = new DiaSemanaFeriado(diaSemana, desde, hasta);
 				
 		if (repo.yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(diaAAgregar)) {
 			throw new RuntimeException ("Ya existe este dia de la semana como feriado en ese periodo");
@@ -32,8 +31,7 @@ public class Configurador {
 
 	public void agregarFeriado(int dia,int mes,LocalDate desde, LocalDate hasta) {
 		
-		DiaSinAnio diaAAgregar = new DiaSinAnio();
-		diaAAgregar.setDiaSinAnio(dia,mes, desde, hasta);
+		DiaSinAnio diaAAgregar = new DiaSinAnio(dia,mes, desde, hasta);
 		
 		if (repo.yaExisteEsteDiaDeEsteMesFeriadoEnEsePeriodo(diaAAgregar)) {
 			throw new RuntimeException ("Ya existe este dia en este mes como feriado en ese periodo");

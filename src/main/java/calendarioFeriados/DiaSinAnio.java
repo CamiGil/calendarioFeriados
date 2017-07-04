@@ -13,6 +13,13 @@ public class DiaSinAnio {
 	
 	// GETTERS SETTERS //
 	
+	public DiaSinAnio(int dia, int mes,LocalDate desde, LocalDate hasta) {
+		this.setMes(dia);
+		this.setDia(mes);
+		this.setDesde(desde);
+		this.setHasta(hasta);
+	}
+	
 	public int getDia() {
 		return dia;
 	}
@@ -43,13 +50,6 @@ public class DiaSinAnio {
 	
 	public void setMes(int mes) {
 		this.mes = mes;
-	}
-	
-	public void setDiaSinAnio(int dia, int mes,LocalDate desde, LocalDate hasta) {
-		this.setMes(dia);
-		this.setDia(mes);
-		this.setDesde(desde);
-		this.setHasta(hasta);
 	}
 
 }

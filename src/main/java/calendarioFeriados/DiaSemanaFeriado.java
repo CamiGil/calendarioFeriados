@@ -12,6 +12,12 @@ public class DiaSemanaFeriado {
 	private LocalDate hasta;
 			
 	// GETTERS SETTERS //
+
+	public DiaSemanaFeriado(DayOfWeek dia,LocalDate desde,LocalDate hasta){
+		this.setDia(dia);
+		this.setDesde(desde);
+		this.setHasta(hasta);
+	}
 	
 	public DayOfWeek getDia() {
 		return dia;
@@ -35,12 +41,6 @@ public class DiaSemanaFeriado {
 	
 	public void setHasta(LocalDate hasta) {
 		this.hasta = hasta;
-	}
-	
-	public void setDiaSemanaFeriado(DayOfWeek dia,LocalDate desde,LocalDate hasta){
-		this.setDia(dia);
-		this.setDesde(desde);
-		this.setHasta(hasta);
 	}
 	
 	// METODOS //
