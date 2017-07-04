@@ -35,18 +35,6 @@ public class TestCalendario {
 		LocalDate fecha = LocalDate.of(2017, 06, 26);
 		assertEquals(2017, fecha.getYear());
 	}
-
-//	@Test
-//	public void el25DeMayoEsFeriado() {
-//		
-//		LocalDate desde = LocalDate.of(1810, 05, 25);
-//		LocalDate hasta = LocalDate.of(3000, 05, 25);
-//
-//		config.agregarFeriado(25,05, desde, hasta);
-//		
-//		LocalDate fecha = LocalDate.of(2017, 05, 25);
-//		assertEquals(true, repo.esFeriado(fecha));
-//	}
 	
 	@Test
 	public void el20DeEneroNoEsFeriado() {
@@ -103,15 +91,24 @@ public class TestCalendario {
 		LocalDate fecha = LocalDate.of(2017, 07, 2);
 		assertEquals(true, repo.esFeriado(fecha));
 	}
+	
+	@Test
+	public void esteDiaDeLaSemanaNoDeberiaSerFeriadoYNoLoEs() {
 
-	@Test(expected = RuntimeException.class)
-	public void agregoUnDiaDeLaSemanaRepetidoComoFeriadoYNoMeDeja() {
-		DayOfWeek dia = DayOfWeek.SUNDAY;
-		LocalDate desde = LocalDate.of(2010, 1, 1);
-		LocalDate hasta = LocalDate.of(2019, 1, 1);
-		
-		config.agregarFeriado(dia,desde,hasta);
+		LocalDate fecha = LocalDate.of(2017, 07, 11);
+		assertEquals(false, repo.esFeriado(fecha));
 	}
+
+//	@Test(expected = RuntimeException.class)
+//	public void agregoUnDiaDeLaSemanaRepetidoComoFeriadoYNoMeDeja() {
+//		
+//		DayOfWeek dia = DayOfWeek.SUNDAY;
+//		LocalDate desde = LocalDate.of(2010, 1, 1);
+//		LocalDate hasta = LocalDate.of(2019, 1, 1);
+//		
+//		config.agregarFeriado(dia,desde,hasta);
+//		config.agregarFeriado(dia,desde,hasta);
+//	}
 
 	@Test
 	public void agregoUnDiaParticularParaQueSeaFeriadoYSeHaceFeriado() {
@@ -127,8 +124,34 @@ public class TestCalendario {
 	}
 
 	@Test
-	public void agregoUnDiaDeUnMesParaQueSeaFeriadoYSeHaceFeriado() {
+	public void el1DeDiciembreEsFeriado() {
+		LocalDate desde = LocalDate.of(2000, 1, 1);
+		LocalDate hasta = LocalDate.of(3000, 1, 1);
 		
+		config.agregarFeriado(1,12,desde,hasta);
+		LocalDate fecha = LocalDate.of(2017, 12, 1);
+		assertEquals(true, repo.esFeriado(fecha));
+	}
+	
+	@Test(expected = java.lang.IllegalArgumentException.class)
+	public void noPuedoHacerEl1del13Feriado() {
+		LocalDate desde = LocalDate.of(2000, 1, 1);
+		LocalDate hasta = LocalDate.of(3000, 1, 1);
+		
+		config.agregarFeriado(1,13,desde,hasta);
+	}
+	
+	@Test(expected = java.lang.IllegalArgumentException.class)
+	public void noPuedoHacerEl32del1Feriado() {
+		LocalDate desde = LocalDate.of(2000, 1, 1);
+		LocalDate hasta = LocalDate.of(3000, 1, 1);
+		
+		config.agregarFeriado(32,1,desde,hasta);
+	}
+	
+	@Test
+	public void agregoUnDiaDeUnMesParaQueSeaFeriadoYSeHaceFeriado() {
+		// 25/12
 		LocalDate desde = LocalDate.of(2000, 1, 1);
 		LocalDate hasta = LocalDate.of(3000, 1, 1);
 		

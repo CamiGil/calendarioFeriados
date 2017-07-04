@@ -15,7 +15,6 @@ public class Configurador {
 		if (repo.yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(diaAAgregar)) {
 			throw new RuntimeException ("Ya existe este dia de la semana como feriado en ese periodo");
 		} else {
-			
 			repo.diaSemanaFeriado.add(diaAAgregar);
 		}
 	}

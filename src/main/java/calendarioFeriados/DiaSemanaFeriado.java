@@ -7,9 +7,9 @@ public class DiaSemanaFeriado {
 
 	// ATRIBUTOS //
 	
-	private DayOfWeek dia;
-	private LocalDate desde;
-	private LocalDate hasta;
+	public DayOfWeek dia;
+	public LocalDate desde;
+	public LocalDate hasta;
 			
 	// GETTERS SETTERS //
 
