@@ -7,15 +7,21 @@ public class Configurador {
 
 	RepositorioFeriados repo = RepositorioFeriados.getInstance();
 
-	public void agregarFeriado(DayOfWeek diaAAgregar) {
+	// Agregar feriado dia de la semana en un periodo
+	public void agregarFeriado(DayOfWeek diaSemana, LocalDate desde, LocalDate hasta) {
 
-		if (repo.yaExisteEsteDiaFeriado(diaAAgregar)) {
-			throw new RuntimeException ("Ya existe este dia de la semana como feriado");
+		DiaSemanaFeriado diaAAgregar = new DiaSemanaFeriado();
+		diaAAgregar.setDiaSemanaFeriado(diaSemana, desde, hasta);
+				
+		if (repo.yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(diaAAgregar)) {
+			throw new RuntimeException ("Ya existe este dia de la semana como feriado en ese periodo");
 		} else {
+			
 			repo.diaSemanaFeriado.add(diaAAgregar);
 		}
 	}
 
+	// Agregar feriado particular de un anio
 	public void agregarFeriado(LocalDate fechaAAgregar) {
 		if (repo.esteDiaParticularEsFeriado(fechaAAgregar)) {
 			throw new RuntimeException ("Ya existe este dia en particular como feriado");
@@ -24,11 +30,15 @@ public class Configurador {
 		}
 	}
 
-	public void agregarFeriado(DiaSinAnio fechaAAgregar) {
-		if (repo.esteDiaDeEsteMesEsFeriado(fechaAAgregar)) {
-			throw new RuntimeException ("Ya existe este dia en este mes como feriado");
+	public void agregarFeriado(int dia,int mes,LocalDate desde, LocalDate hasta) {
+		
+		DiaSinAnio diaAAgregar = new DiaSinAnio();
+		diaAAgregar.setDiaSinAnio(dia,mes, desde, hasta);
+		
+		if (repo.yaExisteEsteDiaDeEsteMesFeriadoEnEsePeriodo(diaAAgregar)) {
+			throw new RuntimeException ("Ya existe este dia en este mes como feriado en ese periodo");
 		} else {
-			repo.diaDelMesFeriado.add(fechaAAgregar);
+			repo.diaDelMesFeriado.add(diaAAgregar);
 		}
 	}
 

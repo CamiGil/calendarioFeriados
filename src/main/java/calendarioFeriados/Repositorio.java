@@ -1,6 +1,5 @@
 package calendarioFeriados;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public interface Repositorio {
@@ -13,8 +12,9 @@ public interface Repositorio {
 
 	public boolean esFeriado(LocalDate fecha);
 
-	public boolean yaExisteEsteDiaFeriado(DayOfWeek diaAAgregar);
+	public boolean yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(
+			DiaSemanaFeriado diaAAgregar);
 
-	public boolean esteDiaDeEsteMesEsFeriado(DiaSinAnio fechaAAgregar);
-
+	public boolean yaExisteEsteDiaDeEsteMesFeriadoEnEsePeriodo(
+			DiaSinAnio fechaAAgregar);
 }
