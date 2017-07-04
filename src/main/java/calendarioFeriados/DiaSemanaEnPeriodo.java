@@ -3,28 +3,19 @@ package calendarioFeriados;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class DiaSemanaFeriado {
+public class DiaSemanaEnPeriodo extends DiaSemana{
 
 	// ATRIBUTOS //
 
-	public DayOfWeek dia;
 	public LocalDate desde;
 	public LocalDate hasta;
 
 	// GETTERS SETTERS //
 
-	public DiaSemanaFeriado(DayOfWeek dia, LocalDate desde, LocalDate hasta) {
-		this.setDia(dia);
+	public DiaSemanaEnPeriodo(DayOfWeek dia, LocalDate desde, LocalDate hasta) {
+		super(dia);
 		this.setDesde(desde);
 		this.setHasta(hasta);
-	}
-
-	public DayOfWeek getDia() {
-		return dia;
-	}
-
-	public void setDia(DayOfWeek dia) {
-		this.dia = dia;
 	}
 
 	public LocalDate getDesde() {

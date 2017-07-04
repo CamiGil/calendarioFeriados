@@ -4,7 +4,11 @@ import java.time.LocalDate;
 
 public interface Repositorio {
 
+	public boolean esteDiaDeLaSemanaEsFeriadoEnPeriodo(LocalDate fecha);
+
 	public boolean esteDiaDeLaSemanaEsFeriado(LocalDate fecha);
+
+	public boolean esteDiaDelMesEsFeriadoEnPeriodo(LocalDate fecha);
 
 	public boolean esteDiaDelMesEsFeriado(LocalDate fecha);
 
@@ -13,8 +17,12 @@ public interface Repositorio {
 	public boolean esFeriado(LocalDate fecha);
 
 	public boolean yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(
-			DiaSemanaFeriado diaAAgregar);
+			DiaSemanaEnPeriodo diaAAgregar);
 
 	public boolean yaExisteEsteDiaDeEsteMesFeriadoEnEsePeriodo(
 			DiaSinAnioEnPeriodo fechaAAgregar);
+
+	public boolean yaExisteEsteDiaDeEsteMesFeriado(DiaSinAnio diaAAgregar);
+
+	public boolean yaExisteEsteDiaDeLaSemanaFeriado(DiaSemana diaAAgregar);
 }

@@ -10,7 +10,8 @@ public class RepositorioFeriados implements Repositorio {
 
 	private static RepositorioFeriados instance = null;
 
-	List<DiaSemanaFeriado> diaSemanaFeriado = new ArrayList<DiaSemanaFeriado>();
+	List<DiaSemanaEnPeriodo> diaSemanaFeriadoEnPeriodo = new ArrayList<DiaSemanaEnPeriodo>();
+	List<DiaSemana> diaSemanaFeriado = new ArrayList<DiaSemana>();
 	List<DiaSinAnioEnPeriodo> diaDelMesFeriadoEnPeriodo = new ArrayList<DiaSinAnioEnPeriodo>();
 	List<DiaSinAnio> diaDelMesFeriado = new ArrayList<DiaSinAnio>();
 	List<LocalDate> diaParticularDeUnAnioFeriado = new ArrayList<LocalDate>();
@@ -27,11 +28,16 @@ public class RepositorioFeriados implements Repositorio {
 		return instance;
 	}
 
-	public boolean esteDiaDeLaSemanaEsFeriado(LocalDate fecha) {
-		return diaSemanaFeriado.stream().anyMatch(
+	public boolean esteDiaDeLaSemanaEsFeriadoEnPeriodo(LocalDate fecha) {
+		return diaSemanaFeriadoEnPeriodo.stream().anyMatch(
 				dia -> dia.getDia().equals(fecha.getDayOfWeek())
 						&& dia.getDesde().isBefore(fecha)
 						&& dia.getHasta().isAfter(fecha));
+	}
+
+	public boolean esteDiaDeLaSemanaEsFeriado(LocalDate fecha) {
+		return diaSemanaFeriado.stream().anyMatch(
+				dia -> dia.getDia().equals(fecha.getDayOfWeek()));
 	}
 
 	public boolean esteDiaDelMesEsFeriadoEnPeriodo(LocalDate fecha) {
@@ -45,7 +51,7 @@ public class RepositorioFeriados implements Repositorio {
 						&& diaDelMes.getDesde().isBefore(fecha)
 						&& diaDelMes.getHasta().isAfter(fecha));
 	}
-	
+
 	public boolean esteDiaDelMesEsFeriado(LocalDate fecha) {
 
 		int dia = fecha.getDayOfMonth();
@@ -63,19 +69,21 @@ public class RepositorioFeriados implements Repositorio {
 
 	public boolean esFeriado(LocalDate fecha) {
 
-		boolean diaSemanaFeriado = this.esteDiaDeLaSemanaEsFeriado(fecha);
+		boolean diaSemanaFeriadoEnPeriodo = this
+				.esteDiaDeLaSemanaEsFeriadoEnPeriodo(fecha);
 		boolean diaDelMesFeriado = this.esteDiaDelMesEsFeriado(fecha);
 		boolean diaParticular = this.esteDiaParticularEsFeriado(fecha);
 		boolean diaDelMesFeriadoEnPeriodo = this
 				.esteDiaDelMesEsFeriadoEnPeriodo(fecha);
+		boolean diaSemanaFeriado = this.esteDiaDeLaSemanaEsFeriado(fecha);
 
-		return diaSemanaFeriado || diaDelMesFeriado || diaParticular
-				|| diaDelMesFeriadoEnPeriodo;
+		return diaSemanaFeriadoEnPeriodo || diaDelMesFeriado || diaParticular
+				|| diaDelMesFeriadoEnPeriodo || diaSemanaFeriado;
 	}
 
 	public boolean yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(
-			DiaSemanaFeriado diaAAgregar) {
-		return diaSemanaFeriado.stream().anyMatch(
+			DiaSemanaEnPeriodo diaAAgregar) {
+		return diaSemanaFeriadoEnPeriodo.stream().anyMatch(
 				combo -> combo.getDia().equals(diaAAgregar)
 						&& combo.getDesde().equals(diaAAgregar.getDesde())
 						&& combo.getHasta().equals(diaAAgregar.getHasta()));
@@ -94,6 +102,11 @@ public class RepositorioFeriados implements Repositorio {
 		return diaDelMesFeriado.stream().anyMatch(
 				diaMes -> diaMes.getDia() == diaAAgregar.getDia()
 						&& diaMes.getMes() == diaAAgregar.getMes());
+	}
+
+	public boolean yaExisteEsteDiaDeLaSemanaFeriado(DiaSemana diaAAgregar) {
+		return diaSemanaFeriadoEnPeriodo.stream().anyMatch(
+				dia -> dia.getDia().equals(diaAAgregar));
 	}
 
 }

@@ -65,10 +65,8 @@ public class TestCalendario {
 	public void todosLosLunesSonFeriadosHastaElInfinito() {
 
 		DayOfWeek dia = DayOfWeek.MONDAY;
-		LocalDate desde = LocalDate.of(1810, 05, 25);
-		LocalDate hasta = LocalDate.of(9999, 05, 25);
 
-		config.agregarFeriado(dia, desde, hasta);
+		config.agregarFeriado(dia);
 
 		LocalDate fecha = LocalDate.of(2017, 07, 3);
 		assertEquals(true, repo.esFeriado(fecha));
