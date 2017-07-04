@@ -149,12 +149,26 @@ public class TestCalendario {
 
 	@Test
 	public void unFeriadoDespuesDeSuPeriodoDeValidezYaNoEsFeriado() {
-
+		// 13/12 desde 1/1/2000 hasta 1/1/3000
 		LocalDate desde = LocalDate.of(2000, 1, 1);
 		LocalDate hasta = LocalDate.of(3000, 1, 1);
 
 		config.agregarFeriado(13, 12, desde, hasta);
-		LocalDate fecha = LocalDate.of(3090, 12, 25);
+		LocalDate fecha = LocalDate.of(3090, 12, 13);
+		assertEquals(false, repo.esFeriado(fecha));
+	}
+	
+	@Test
+	public void unFeriadoDuranteSuPeriodoDeValidezEsFeriado() {
+		// 13/12 desde 1/1/2000 hasta 1/1/3000
+		LocalDate fecha = LocalDate.of(2010, 12, 13);
+		assertEquals(true, repo.esFeriado(fecha));
+	}
+	
+	@Test
+	public void unFeriadoAntesDeSuPeriodoDeValidezAunNoEsFeriado() {
+		// 13/12 desde 1/1/2000 hasta 1/1/3000
+		LocalDate fecha = LocalDate.of(1000, 12, 13);
 		assertEquals(false, repo.esFeriado(fecha));
 	}
 
