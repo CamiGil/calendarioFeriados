@@ -15,7 +15,7 @@ public class DiaSinAnio {
 
 	public DiaSinAnio(int dia, int mes, LocalDate desde, LocalDate hasta) {
 		this.setMes(mes);
-		this.setDia(dia,mes);
+		this.setDia(dia, mes);
 		this.setDesde(desde);
 		this.setHasta(hasta);
 	}

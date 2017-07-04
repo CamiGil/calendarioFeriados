@@ -8,15 +8,19 @@ public class Configurador {
 	RepositorioFeriados repo = RepositorioFeriados.getInstance();
 
 	// Agregar feriado dia de la semana en un periodo
-	public void agregarFeriado(DayOfWeek diaSemana, LocalDate desde, LocalDate hasta) {
+	public void agregarFeriado(DayOfWeek diaSemana, LocalDate desde,
+			LocalDate hasta) {
 
-		DiaSemanaFeriado diaAAgregar = new DiaSemanaFeriado(diaSemana, desde, hasta);
-				
+		DiaSemanaFeriado diaAAgregar = new DiaSemanaFeriado(diaSemana, desde,
+				hasta);
+
 		if (repo.yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(diaAAgregar)) {
-			throw new RuntimeException ("Ya existe este dia de la semana como feriado en ese periodo");
-		} else if (hasta.isBefore(desde) || desde.equals(hasta)){
-			throw new RuntimeException ("Existe un error con el periodo de validez del feriado");
-		}else{
+			throw new RuntimeException(
+					"Ya existe este dia de la semana como feriado en ese periodo");
+		} else if (hasta.isBefore(desde) || desde.equals(hasta)) {
+			throw new RuntimeException(
+					"Existe un error con el periodo de validez del feriado");
+		} else {
 			repo.diaSemanaFeriado.add(diaAAgregar);
 		}
 	}
@@ -24,21 +28,25 @@ public class Configurador {
 	// Agregar feriado particular de un anio
 	public void agregarFeriado(LocalDate fechaAAgregar) {
 		if (repo.esteDiaParticularEsFeriado(fechaAAgregar)) {
-			throw new RuntimeException ("Ya existe este dia en particular como feriado");
+			throw new RuntimeException(
+					"Ya existe este dia en particular como feriado");
 		} else {
 			repo.diaParticularDeUnAnioFeriado.add(fechaAAgregar);
 		}
 	}
 
-	public void agregarFeriado(int dia,int mes,LocalDate desde, LocalDate hasta) {
-		
-		DiaSinAnio diaAAgregar = new DiaSinAnio(dia,mes, desde, hasta);
-		
+	public void agregarFeriado(int dia, int mes, LocalDate desde,
+			LocalDate hasta) {
+
+		DiaSinAnio diaAAgregar = new DiaSinAnio(dia, mes, desde, hasta);
+
 		if (repo.yaExisteEsteDiaDeEsteMesFeriadoEnEsePeriodo(diaAAgregar)) {
-			throw new RuntimeException ("Ya existe este dia en este mes como feriado en ese periodo");
-		} else if (hasta.isBefore(desde) || desde.equals(hasta)){
-			throw new RuntimeException ("Existe un error con el periodo de validez del feriado");
-		}else{
+			throw new RuntimeException(
+					"Ya existe este dia en este mes como feriado en ese periodo");
+		} else if (hasta.isBefore(desde) || desde.equals(hasta)) {
+			throw new RuntimeException(
+					"Existe un error con el periodo de validez del feriado");
+		} else {
 			repo.diaDelMesFeriado.add(diaAAgregar);
 		}
 	}
