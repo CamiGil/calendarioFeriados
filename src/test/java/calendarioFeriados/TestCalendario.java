@@ -159,7 +159,25 @@ public class TestCalendario {
 		LocalDate fecha = LocalDate.of(LocalDate.now().getYear(), 12, 25);
 		assertEquals(true, repo.esFeriado(fecha));
 	}
+	
+	@Test(expected = RuntimeException.class)
+	public void elPeriodoDeValidezNoPuedeSerElMismoDia() {
+		// 25/12
+		LocalDate desde = LocalDate.of(3000, 1, 1);
+		LocalDate hasta = LocalDate.of(3000, 1, 1);
+		
+		config.agregarFeriado(25,12,desde,hasta);
+	}
 
+	@Test(expected = RuntimeException.class)
+	public void elPeriodoDeValidezNoPuedeTerminarAntesDeEmpezar() {
+		// 25/12
+		LocalDate desde = LocalDate.of(4000, 1, 1);
+		LocalDate hasta = LocalDate.of(3000, 1, 1);
+		
+		config.agregarFeriado(25,12,desde,hasta);
+	}
+	
 //	@Test(expected = RuntimeException.class)
 //	public void agregoUnDiaDeUnMesRepetidoComoFeriadoYNoMeDeja() {
 //		LocalDate desde = LocalDate.of(2000, 1, 1);
@@ -167,8 +185,7 @@ public class TestCalendario {
 //		
 //		config.agregarFeriado(25,12,desde,hasta);
 //	}
-	
-
+//	
 	public void agregoLosJuevesComoFeriadosDesde1DeEneroDe2015A1DeEneroDe2016() {
 		LocalDate fecha = LocalDate.of(2015, 1, 8);
 		LocalDate desde = LocalDate.of(2015, 1, 1);

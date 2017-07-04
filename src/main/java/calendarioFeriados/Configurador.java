@@ -14,7 +14,9 @@ public class Configurador {
 				
 		if (repo.yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(diaAAgregar)) {
 			throw new RuntimeException ("Ya existe este dia de la semana como feriado en ese periodo");
-		} else {
+		} else if (hasta.isBefore(desde) || desde.equals(hasta)){
+			throw new RuntimeException ("Existe un error con el periodo de validez del feriado");
+		}else{
 			repo.diaSemanaFeriado.add(diaAAgregar);
 		}
 	}
@@ -34,7 +36,9 @@ public class Configurador {
 		
 		if (repo.yaExisteEsteDiaDeEsteMesFeriadoEnEsePeriodo(diaAAgregar)) {
 			throw new RuntimeException ("Ya existe este dia en este mes como feriado en ese periodo");
-		} else {
+		} else if (hasta.isBefore(desde) || desde.equals(hasta)){
+			throw new RuntimeException ("Existe un error con el periodo de validez del feriado");
+		}else{
 			repo.diaDelMesFeriado.add(diaAAgregar);
 		}
 	}
