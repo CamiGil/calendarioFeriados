@@ -9,7 +9,7 @@ Se puede configurar el calendario de distintas maneras:
 1) Indicándole que un día de la semana es no laborable. Por ejemplo si se le indica que Domingo es feriado, entonces todos los domingos son feriados.
 2) Indicándole que un día de un mes es feriado, por ejemplo 25 de Diciembre. Por lo tanto todos los 25 de diciembre sin importar el año son feriados.
 3) Indicándole que un día particular es feriado, por ejemplo 4 de Abril de 2012.
-Las opciones 1 y 2 indicando un rango de validez del feriado. Por ejemplo: Desde el 1/1/1990 hasta el 31/12/1999 todos los Domingos son feriados, o desde 1/1/2000 hasta 1/1/2013 los 4 de Abril son feriados.
+4) Las opciones 1 y 2 indicando un rango de validez del feriado. Por ejemplo: Desde el 1/1/1990 hasta el 31/12/1999 todos los Domingos son feriados, o desde 1/1/2000 hasta 1/1/2013 los 4 de Abril son feriados.
 
 Aclaraciones:
 - Desarrollarlo usando TDD.

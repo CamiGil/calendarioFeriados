@@ -28,6 +28,22 @@ public class RepositorioFeriados implements Repositorio {
 		return instance;
 	}
 
+	public boolean esFeriado(LocalDate fecha) {
+
+		boolean diaSemanaFeriadoEnPeriodo = this
+				.esteDiaDeLaSemanaEsFeriadoEnPeriodo(fecha);
+		boolean diaDelMesFeriado = this.esteDiaDelMesEsFeriado(fecha);
+		boolean diaParticular = this.esteDiaParticularEsFeriado(fecha);
+		boolean diaDelMesFeriadoEnPeriodo = this
+				.esteDiaDelMesEsFeriadoEnPeriodo(fecha);
+		boolean diaSemanaFeriado = this.esteDiaDeLaSemanaEsFeriado(fecha);
+
+		return diaSemanaFeriadoEnPeriodo || diaDelMesFeriado || diaParticular
+				|| diaDelMesFeriadoEnPeriodo || diaSemanaFeriado;
+	}
+
+	// ***** Metodos para buscar si una fecha es feriado *****//
+
 	public boolean esteDiaDeLaSemanaEsFeriadoEnPeriodo(LocalDate fecha) {
 		return diaSemanaFeriadoEnPeriodo.stream().anyMatch(
 				dia -> dia.getDia().equals(fecha.getDayOfWeek())
@@ -67,19 +83,7 @@ public class RepositorioFeriados implements Repositorio {
 				feriado -> feriado.equals(fecha));
 	}
 
-	public boolean esFeriado(LocalDate fecha) {
-
-		boolean diaSemanaFeriadoEnPeriodo = this
-				.esteDiaDeLaSemanaEsFeriadoEnPeriodo(fecha);
-		boolean diaDelMesFeriado = this.esteDiaDelMesEsFeriado(fecha);
-		boolean diaParticular = this.esteDiaParticularEsFeriado(fecha);
-		boolean diaDelMesFeriadoEnPeriodo = this
-				.esteDiaDelMesEsFeriadoEnPeriodo(fecha);
-		boolean diaSemanaFeriado = this.esteDiaDeLaSemanaEsFeriado(fecha);
-
-		return diaSemanaFeriadoEnPeriodo || diaDelMesFeriado || diaParticular
-				|| diaDelMesFeriadoEnPeriodo || diaSemanaFeriado;
-	}
+	// ***** Metodos para verificar que no se agreguen feriados repetidos *****//
 
 	public boolean yaExisteEsteDiaDeLaSemanaFeriadoEnEsePeriodo(
 			DiaSemanaEnPeriodo diaAAgregar) {
